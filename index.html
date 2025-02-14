@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            background-color: #d7f9a7;
+            color: #6b705c;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        .smiski {
+            width: 40vw;
+            height: auto;
+            max-height: 50vh;
+            object-fit: contain;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 1;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .yes {
+            background-color: #ffcad4;
+            color: #fff;
+        }
+        .no {
+            background-color: #b0c4de;
+            color: #fff;
+            position: relative;
+        }
+        .smiski-figure {
+            width: 30px;
+            height: 50px;
+            background-color: #c0e57c;
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0px 0px 10px #a0d56e;
+            opacity: 0.8;
+        }
+        .smiski-figure::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #c0e57c;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+        }
+        .smiski-figure::after {
+            content: '•  •';
+            font-size: 10px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: black;
+            display: flex;
+            justify-content: center;
+            width: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <h1>Will you be my Valentine? 💕</h1>
+        <div class="buttons">
+            <button class="btn yes" onclick="yesClicked()">Yes! ❤️</button>
+            <button class="btn no" id="noBtn" onmouseover="moveNo()">No 😢</button>
+        </div>
+    </div>
+    <img src="/Images/Green.jpg" class="smiski" id="smiskiImg" alt="Smiski">
+    <script>
+        function yesClicked() {
+            alert("Heh 💕");
+            document.getElementById("smiskiImg").style.opacity = "1";
+            document.getElementById("content").style.display = "none";
+        }
+        function moveNo() {
+            let noBtn = document.getElementById("noBtn");
+            let x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            let y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = "absolute";
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+        function createSmiskis() {
+            for (let i = 0; i < 10; i++) {
+                let smiski = document.createElement("div");
+                smiski.classList.add("smiski-figure");
+                smiski.style.left = `${Math.random() * window.innerWidth}px`;
+                smiski.style.top = `${Math.random() * window.innerHeight}px`;
+                document.body.appendChild(smiski);
+            }
+        }
+        window.onload = createSmiskis;
+    </script>
+</body>
+</html>
